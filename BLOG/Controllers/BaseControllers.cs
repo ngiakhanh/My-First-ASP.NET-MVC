@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLOG.Controllers
+namespace BLOG_Controller
 {
     public class BaseControllers<T>
     {       
@@ -14,5 +14,6 @@ namespace BLOG.Controllers
         public virtual Boolean create(T obj) { return true; }
         public virtual Boolean update(T obj) { return true; }
         public virtual Boolean delete(Guid id) { return true; }
+        public virtual T checkLogin(String userName, String passWord) { return default(T); }
     }
 }

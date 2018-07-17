@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLOG.Controllers
+namespace BLOG_Controller
 {
     class BlogControllers : BaseControllers<BlogObject>
     {
@@ -17,22 +17,22 @@ namespace BLOG.Controllers
 
         public override BlogObject getElementById(Guid id)
         {
-            return base.getElementById(id);
+            return new BlogModels().getElementById(id);
         }
 
         public override bool update(BlogObject obj)
         {
-            return base.update(obj);
+            return new BlogModels().update(obj);
         }
 
         public override bool create(BlogObject obj)
         {
-            return base.create(obj);
+            return new BlogModels().create(obj);
         }
 
         public override bool delete(Guid id)
         {
-            return base.delete(id);
+            return new BlogModels().delete(id);
         }
     }
 }

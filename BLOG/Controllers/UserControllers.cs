@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BLOG.Controllers
+namespace BLOG_Controller
 {
     public class UserControllers: BaseControllers<UserObject>
     {
@@ -17,23 +17,27 @@ namespace BLOG.Controllers
 
         public override UserObject getElementById(Guid id)
         {
-            return base.getElementById(id);
+            return new UserModel().getElementById(id);
         }
 
         public override bool update(UserObject obj)
         {
-            return base.update(obj);
+            return new UserModel().update(obj);
         }
 
         public override bool create(UserObject obj)
         {
-            return base.create(obj);
+            return new UserModel().create(obj);
         }
 
         public override bool delete(Guid id)
         {
-            return base.delete(id);
+            return new UserModel().delete(id);
         }
 
+        public override UserObject checkLogin(string userName, string passWord)
+        {
+            return new UserModel().checkLogin(userName, passWord);
+        }
     }
 }
