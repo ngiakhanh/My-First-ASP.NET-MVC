@@ -23,5 +23,6 @@ namespace BLOG_Model.EntityFramework
         public Nullable<System.DateTime> updated_at { get; set; }
         public Nullable<bool> isDel { get; set; }
         public string userName { get; set; }
+        public string fullName { get; set; }
     }
 }

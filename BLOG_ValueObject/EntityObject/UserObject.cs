@@ -17,5 +17,6 @@ namespace BLOG_ValueObject.EntityObject
         public Nullable<System.DateTime> created_at { get; set; }
         public Nullable<System.DateTime> updated_at { get; set; }
         public Nullable<bool> isDel { get; set; }
+        public Boolean Remember { get; set; }
     }
 }

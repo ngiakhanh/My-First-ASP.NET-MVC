@@ -239,5 +239,18 @@ namespace BLOG_Model.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_User_update", idUserParameter, userNameParameter, passWordParameter, emailParameter, fullNameParameter, mobileParameter, created_atParameter, updated_atParameter, isDelParameter);
         }
+    
+        public virtual ObjectResult<SP_User_checkLogin_Result> SP_User_checkLogin(string userName, string passWord)
+        {
+            var userNameParameter = userName != null ?
+                new ObjectParameter("userName", userName) :
+                new ObjectParameter("userName", typeof(string));
+    
+            var passWordParameter = passWord != null ?
+                new ObjectParameter("passWord", passWord) :
+                new ObjectParameter("passWord", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_checkLogin_Result>("SP_User_checkLogin", userNameParameter, passWordParameter);
+        }
     }
 }

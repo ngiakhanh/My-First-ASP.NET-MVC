@@ -74,6 +74,9 @@
     <Compile Include="EntityFramework\SP_Blog_getElements_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\SP_User_checkLogin_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\SP_User_getElementById_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

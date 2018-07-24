@@ -47,7 +47,12 @@ namespace BLOG_Model.Model
                 obj.created_at = item.created_at;
                 obj.updated_at = item.updated_at;
                 obj.isDel = item.isDel;
-                //obj.UserObject = item.UserObject;
+                obj.UserObject = new UserObject()
+                {
+                    userName = item.userName,
+                    fullName = item.fullName,
+                };
+
                 return obj;
             }
             return null;
@@ -70,7 +75,7 @@ namespace BLOG_Model.Model
         {
             try
             {
-                return dbContext.SP_Blog_update(obj.idBlog, obj.title, obj.summury, obj.contents, obj.author, obj.idUser, obj.created_at, DateTime.Now, false) > 0;
+                return dbContext.SP_Blog_create(obj.idBlog, obj.title, obj.summury, obj.contents, obj.author, obj.idUser, obj.created_at, DateTime.Now, false) > 0;
  
             }
             catch

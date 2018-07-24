@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Y2018AP51BLOGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Y2018AP51BLOGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tbl_Blog">
           <Key>
             <PropertyRef Name="idBlog" />
@@ -62,6 +62,10 @@
           <Parameter Name="updated_at" Type="datetime" Mode="In" />
           <Parameter Name="isDel" Type="bit" Mode="In" />
         </Function>
+        <Function Name="SP_User_checkLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <Parameter Name="passWord" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_User_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userName" Type="varchar" Mode="In" />
@@ -95,8 +99,7 @@
           <EntitySet Name="tbl_Blog" EntityType="Self.tbl_Blog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="Y2018AP51BLOGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -143,10 +146,10 @@
             <Parameter Name="isDel" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_Blog_delete">
-            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_Blog_getElementById" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getElementById_Result)">
-            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_Blog_getElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getElements_Result)" />
           <FunctionImport Name="SP_Blog_update">
@@ -172,10 +175,10 @@
             <Parameter Name="isDel" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="SP_User_delete">
-            <Parameter Name="idUser" Mode="In" Type="Guid" />
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_User_getElementById" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getElementById_Result)">
-            <Parameter Name="idUser" Mode="In" Type="Guid" />
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_User_getElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getElements_Result)" />
           <FunctionImport Name="SP_User_update">
@@ -189,6 +192,10 @@
             <Parameter Name="updated_at" Mode="In" Type="DateTime" />
             <Parameter Name="isDel" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <FunctionImport Name="SP_User_checkLogin" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_checkLogin_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Blog_getElementById_Result">
           <Property Type="Guid" Name="idBlog" Nullable="false" />
@@ -201,6 +208,7 @@
           <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="isDel" Nullable="true" />
           <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="SP_Blog_getElements_Result">
           <Property Type="Guid" Name="idBlog" Nullable="false" />
@@ -226,6 +234,17 @@
           <Property Type="Boolean" Name="isDel" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_User_getElements_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_User_checkLogin_Result">
           <Property Type="Guid" Name="idUser" Nullable="false" />
           <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
@@ -287,6 +306,7 @@
                 <ScalarProperty Name="updated_at" ColumnName="updated_at" />
                 <ScalarProperty Name="isDel" ColumnName="isDel" />
                 <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -340,6 +360,21 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_User_update" FunctionName="Y2018AP51BLOGModel.Store.SP_User_update" />
+          <FunctionImportMapping FunctionImportName="SP_User_checkLogin" FunctionName="Y2018AP51BLOGModel.Store.SP_User_checkLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_checkLogin_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -22,6 +22,7 @@ namespace BLOG_Model.Model
                 obj.passWord = item.passWord;
                 obj.fullName = item.fullName;
                 obj.mobile = item.mobile;
+                obj.email = item.email;
                 obj.created_at = item.created_at;
                 obj.updated_at = item.updated_at;
                 obj.isDel = item.isDel;
@@ -41,6 +42,7 @@ namespace BLOG_Model.Model
                 obj.passWord = item.passWord;
                 obj.fullName = item.fullName;
                 obj.mobile = item.mobile;
+                obj.email = item.email;
                 obj.created_at = item.created_at;
                 obj.updated_at = item.updated_at;
                 obj.isDel = item.isDel;
@@ -66,7 +68,7 @@ namespace BLOG_Model.Model
         {
             try
             {
-                return dbContext.SP_User_update(obj.idUser, obj.userName, obj.passWord, obj.email, obj.fullName, obj.mobile, DateTime.Now, DateTime.Now, false) > 0;
+                return dbContext.SP_User_create(Guid.NewGuid(), obj.userName, BLOG_ValueObject.Common.CommonConstant.PASSWORD, obj.email, obj.fullName, obj.mobile, DateTime.Now, DateTime.Now, false) > 0;
 
             }
             catch
@@ -78,6 +80,26 @@ namespace BLOG_Model.Model
         public override bool delete(Guid id)
         {
             return dbContext.SP_User_delete(id) > 0;
+        }
+
+        public override UserObject checkLogin(string userName, string passWord)
+        {
+            var data = dbContext.SP_User_checkLogin(userName, passWord);
+            foreach (var item in data)
+            {
+                UserObject obj = new UserObject();
+                obj.idUser = item.idUser;
+                obj.userName = item.userName;
+                obj.passWord = item.passWord;
+                obj.fullName = item.fullName;
+                obj.mobile = item.mobile;
+                obj.created_at = item.created_at;
+                obj.updated_at = item.updated_at;
+                obj.isDel = item.isDel;
+
+                return obj;
+            }
+            return null;
         }
     }
 }
