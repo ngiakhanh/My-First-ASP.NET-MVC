@@ -1,0 +1,401 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Y2018AP51BLOGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Blog">
+          <Key>
+            <PropertyRef Name="idBlog" />
+          </Key>
+          <Property Name="idBlog" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="summury" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="contents" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="author" Type="nvarchar" MaxLength="50" />
+          <Property Name="idUser" Type="uniqueidentifier" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="isDel" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="passWord" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="fullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="mobile" Type="varchar" MaxLength="20" />
+          <Property Name="created_at" Type="datetime" />
+          <Property Name="updated_at" Type="datetime" />
+          <Property Name="isDel" Type="bit" />
+        </EntityType>
+        <Function Name="SP_Blog_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="title" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="summury" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="contents" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="author" Type="nvarchar" Mode="In" />
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="updated_at" Type="datetime" Mode="In" />
+          <Parameter Name="isDel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_Blog_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_Blog_getElementById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_Blog_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Blog_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="title" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="summury" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="contents" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="author" Type="nvarchar" Mode="In" />
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="updated_at" Type="datetime" Mode="In" />
+          <Parameter Name="isDel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_User_checkLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <Parameter Name="passWord" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_User_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <Parameter Name="passWord" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="mobile" Type="varchar" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="updated_at" Type="datetime" Mode="In" />
+          <Parameter Name="isDel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_User_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_User_getElementById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_User_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_User_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="userName" Type="varchar" Mode="In" />
+          <Parameter Name="passWord" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="fullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="mobile" Type="varchar" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
+          <Parameter Name="updated_at" Type="datetime" Mode="In" />
+          <Parameter Name="isDel" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="Y2018AP51BLOGModelStoreContainer">
+          <EntitySet Name="tbl_Blog" EntityType="Self.tbl_Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Y2018AP51BLOGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Blog">
+          <Key>
+            <PropertyRef Name="idBlog" />
+          </Key>
+          <Property Name="idBlog" Type="Guid" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="summury" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="contents" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="idUser" Type="Guid" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="isDel" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Guid" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="passWord" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="mobile" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <Property Name="updated_at" Type="DateTime" Precision="3" />
+          <Property Name="isDel" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="Y2018AP51BLOGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Blog" EntityType="Self.tbl_Blog" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" />
+          <FunctionImport Name="SP_Blog_create">
+            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="summury" Mode="In" Type="String" />
+            <Parameter Name="contents" Mode="In" Type="String" />
+            <Parameter Name="author" Mode="In" Type="String" />
+            <Parameter Name="idUser" Mode="In" Type="Guid" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="updated_at" Mode="In" Type="DateTime" />
+            <Parameter Name="isDel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Blog_delete">
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Blog_getElementById" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getElementById_Result)">
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Blog_getElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getElements_Result)" />
+          <FunctionImport Name="SP_Blog_update">
+            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+            <Parameter Name="title" Mode="In" Type="String" />
+            <Parameter Name="summury" Mode="In" Type="String" />
+            <Parameter Name="contents" Mode="In" Type="String" />
+            <Parameter Name="author" Mode="In" Type="String" />
+            <Parameter Name="idUser" Mode="In" Type="Guid" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="updated_at" Mode="In" Type="DateTime" />
+            <Parameter Name="isDel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_create">
+            <Parameter Name="idUser" Mode="In" Type="Guid" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="mobile" Mode="In" Type="String" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="updated_at" Mode="In" Type="DateTime" />
+            <Parameter Name="isDel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_delete">
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_getElementById" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getElementById_Result)">
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_getElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getElements_Result)" />
+          <FunctionImport Name="SP_User_update">
+            <Parameter Name="idUser" Mode="In" Type="Guid" />
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="fullName" Mode="In" Type="String" />
+            <Parameter Name="mobile" Mode="In" Type="String" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+            <Parameter Name="updated_at" Mode="In" Type="DateTime" />
+            <Parameter Name="isDel" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_checkLogin" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_checkLogin_Result)">
+            <Parameter Name="userName" Mode="In" Type="String" />
+            <Parameter Name="passWord" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SP_Blog_getElementById_Result">
+          <Property Type="Guid" Name="idBlog" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" />
+          <Property Type="String" Name="summury" Nullable="false" />
+          <Property Type="String" Name="contents" Nullable="false" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="idUser" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_Blog_getElements_Result">
+          <Property Type="Guid" Name="idBlog" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" />
+          <Property Type="String" Name="summury" Nullable="false" />
+          <Property Type="String" Name="contents" Nullable="false" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="idUser" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_User_getElementById_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_User_getElements_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_User_checkLogin_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Y2018AP51BLOGModelStoreContainer" CdmEntityContainer="Y2018AP51BLOGEntities">
+          <EntitySetMapping Name="tbl_Blog">
+            <EntityTypeMapping TypeName="Y2018AP51BLOGModel.tbl_Blog">
+              <MappingFragment StoreEntitySet="tbl_Blog">
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summury" ColumnName="summury" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="Y2018AP51BLOGModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_create" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_create" />
+          <FunctionImportMapping FunctionImportName="SP_Blog_delete" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_delete" />
+          <FunctionImportMapping FunctionImportName="SP_Blog_getElementById" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_getElementById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_Blog_getElementById_Result">
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summury" ColumnName="summury" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_getElements" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_getElements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_Blog_getElements_Result">
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summury" ColumnName="summury" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_update" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_update" />
+          <FunctionImportMapping FunctionImportName="SP_User_create" FunctionName="Y2018AP51BLOGModel.Store.SP_User_create" />
+          <FunctionImportMapping FunctionImportName="SP_User_delete" FunctionName="Y2018AP51BLOGModel.Store.SP_User_delete" />
+          <FunctionImportMapping FunctionImportName="SP_User_getElementById" FunctionName="Y2018AP51BLOGModel.Store.SP_User_getElementById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_getElementById_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_getElements" FunctionName="Y2018AP51BLOGModel.Store.SP_User_getElements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_getElements_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_update" FunctionName="Y2018AP51BLOGModel.Store.SP_User_update" />
+          <FunctionImportMapping FunctionImportName="SP_User_checkLogin" FunctionName="Y2018AP51BLOGModel.Store.SP_User_checkLogin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_checkLogin_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

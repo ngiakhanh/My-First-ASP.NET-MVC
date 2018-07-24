@@ -1,0 +1,61 @@
+﻿@model BLOG_ValueObject.EntityObject.UserObject
+
+@{
+    ViewBag.Title = "UserAdminCreate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2 style="text-transform: uppercase">Create Account</h2>
+
+@using (Html.BeginForm("UserAdminCreate", "UserAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Account</label>
+            <input name="userName" placeholder="Username" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Password</label>
+            <input name="passWord" type = "password" placeholder="Password" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Email</label>
+            <input name="email" type = "email" placeholder="Email" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Full name</label>
+            <input name="fullName" placeholder="Full name" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Mobile</label>
+            <input name="mobile" placeholder="Mobile" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a href="@Url.Action("UserAdminShowListIndex", "UserAdmin")" class="btn btn-link">Return</a>
+        </div>
+    </div>
+</div>
+}
