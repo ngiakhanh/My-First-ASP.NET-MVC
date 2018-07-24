@@ -75,7 +75,7 @@ namespace BLOG_Model.Model
         {
             try
             {
-                return dbContext.SP_Blog_create(obj.idBlog, obj.title, obj.summury, obj.contents, obj.author, obj.idUser, obj.created_at, DateTime.Now, false) > 0;
+                return dbContext.SP_Blog_create(Guid.NewGuid(), obj.title, obj.summury, obj.contents, obj.author, obj.idUser, DateTime.Now, DateTime.Now, false) > 0;
  
             }
             catch

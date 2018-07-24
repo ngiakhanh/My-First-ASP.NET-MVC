@@ -35,6 +35,7 @@ namespace WebApplication.Areas.Admin.Controllers
 
                     //Cookie
                     FormsAuthentication.SetAuthCookie(user.userName, user.Remember);
+                    return RedirectToAction("BlogAdminShowListIndex", "BlogAdmin");
                 }
                 else
                 {

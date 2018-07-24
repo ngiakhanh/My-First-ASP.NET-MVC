@@ -1,0 +1,65 @@
+﻿@model BLOG_ValueObject.EntityObject.BlogObject
+
+@{
+    ViewBag.Title = "BlogAdminUpdate";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2>Update</h2>
+
+@using (Html.BeginForm("BlogAdminUpdate", "BlogAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <input name="idBlog" value="@Model.idBlog" class="hidden" />
+    <input name="created_at" value="@Model.created_at" class="hidden" />
+    <input name="idUser" value="@Model.idUser" class="hidden" />
+    <input name="author" value="@Model.author" class="hidden" />
+    <input name="UserObject" value="@Model.UserObject" class="hidden" />
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Title</label>
+            <input name="title" value="@Model.title" placeholder="Title" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Summary</label>
+            <input name="summury" value="@Model.summury" placeholder="Summary" required class="form-control" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <label>Contents</label>
+            <textarea name="contents" value="@Html.Raw(Model.contents)" required>Contents</textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-6">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            <a href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin")" class="btn btn-link">Return</a>
+        </div>
+    </div>
+</div>
+}
+
+<script src="~/Areas/Admin/Content/ckeditor/ckeditor.js"></script>
+<script src="~/Areas/Admin/Content/ckfinder/ckfinder.js"></script>
+
+<script type="text/javascript">
+    var editor = CKEDITOR.instances['contents'];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('contents', {
+                enterMode: CKEDITOR.ENTER_BR,
+            });
+            CKFinder.setupCKEditor(null, '@Url.Content("~/Areas/Admin/Content/ckfinder/")');
+</script>

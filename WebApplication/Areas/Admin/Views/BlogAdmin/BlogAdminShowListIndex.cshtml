@@ -1,0 +1,64 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.BlogObject>
+
+@{
+    ViewBag.Title = "BlogAdminShowListIndex";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2>DANH SACH BLOG</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<p>
+    <a href="@Url.Action("BlogAdminCreate", "BlogAdmin")" class="btn btn-primary">Add</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Summary</th>
+            <th scope="col">Contents</th>
+            <th scope="col">Author</th>
+            <th scope="col">Username</th>
+            <th scope="col">Created at</th>
+            <th scope="col">Updated at</th>
+            <th scope="col">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.title</td>
+            <td>@item.summury</td>
+            <td>@Html.Raw(item.contents)</td>
+            <td>@item.author</td>
+            <td>@ViewBag.username</td>
+            <td>@item.created_at.Value.ToString("dd/MM/yyyy")</td>
+            <td>@item.updated_at.Value.ToString("dd/MM/yyyy")</td>
+            <td>
+                <a href="@Url.Action("BlogAdminUpdate","BlogAdmin", new {id = item.idBlog })" class="btn btn-success">Update</a>
+                <a onclick="delete_blog('@item.idBlog','@item.title')" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+   function delete_blog(id, name) {
+       if (confirm("Are you sure to delete "+name+" ?") == false)
+           return;
+	   $.ajax({
+		   type: 'POST',
+		   data: { id: id},
+		   url: '@Url.Action("BlogAdminDelete", "BlogAdmin")',
+		   success: function()
+           {
+               window.location.reload();
+           },
+           error: function()
+           {
+               alert("Failed :((");
+           }
+	   })
+}
+</script>

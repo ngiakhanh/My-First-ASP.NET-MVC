@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BLOG_Controller
 {
-    class BlogControllers : BaseControllers<BlogObject>
+    public class BlogControllers : BaseControllers<BlogObject>
     {
         public override List<BlogObject> getElements()
         {
