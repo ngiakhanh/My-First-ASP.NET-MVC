@@ -16,16 +16,18 @@ namespace BLOG_Model.Model
             List<UserObject> listUser = new List<UserObject>();
             foreach (var item in listData)
             {
-                UserObject obj = new UserObject();
-                obj.idUser = item.idUser;
-                obj.userName = item.userName;
-                obj.passWord = item.passWord;
-                obj.fullName = item.fullName;
-                obj.mobile = item.mobile;
-                obj.email = item.email;
-                obj.created_at = item.created_at;
-                obj.updated_at = item.updated_at;
-                obj.isDel = item.isDel;
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
                 listUser.Add(obj);
             }
             return listUser;
@@ -36,16 +38,18 @@ namespace BLOG_Model.Model
             var data = dbContext.SP_User_getElementById(id);
             foreach (var item in data)
             {
-                UserObject obj = new UserObject();
-                obj.idUser = item.idUser;
-                obj.userName = item.userName;
-                obj.passWord = item.passWord;
-                obj.fullName = item.fullName;
-                obj.mobile = item.mobile;
-                obj.email = item.email;
-                obj.created_at = item.created_at;
-                obj.updated_at = item.updated_at;
-                obj.isDel = item.isDel;
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
                 return obj;
             }
             return null;
@@ -87,15 +91,17 @@ namespace BLOG_Model.Model
             var data = dbContext.SP_User_checkLogin(userName, passWord);
             foreach (var item in data)
             {
-                UserObject obj = new UserObject();
-                obj.idUser = item.idUser;
-                obj.userName = item.userName;
-                obj.passWord = item.passWord;
-                obj.fullName = item.fullName;
-                obj.mobile = item.mobile;
-                obj.created_at = item.created_at;
-                obj.updated_at = item.updated_at;
-                obj.isDel = item.isDel;
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
 
                 return obj;
             }

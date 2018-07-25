@@ -27,7 +27,7 @@ namespace BLOG_Model.Model
                     created_at = item.created_at,
                     updated_at = item.updated_at,
                     isDel = item.isDel,
-                    UserObject = new UserObject()
+                    UserObject = new UserObject
                     {
                         userName = item.userName,
                     }
@@ -54,7 +54,7 @@ namespace BLOG_Model.Model
                     created_at = item.created_at,
                     updated_at = item.updated_at,
                     isDel = item.isDel,
-                    UserObject = new UserObject()
+                    UserObject = new UserObject
                     {
                         userName = item.userName,
                         fullName = item.fullName,
