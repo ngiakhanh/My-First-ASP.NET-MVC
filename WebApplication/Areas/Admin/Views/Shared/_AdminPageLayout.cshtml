@@ -18,7 +18,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8" />
-    <title>Metronic | Admin Dashboard Template</title>
+    <title>WhiteK | Admin Dashboard Template</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta content="" name="description" />
@@ -68,7 +68,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <div class="page-header-inner container">
             <!-- BEGIN LOGO -->
             <div class="page-logo">
-                <a href="index.html">
+                <a href="@Url.Action("Home", "HomeAdmin")">
                     <img src="~/Areas/Admin/Content/assets/admin/layout2/img/logo-default.png" alt="logo" class="logo-default" />
                 </a>
                 <div class="menu-toggler sidebar-toggler">
@@ -494,7 +494,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <img alt="" class="img-circle" src="~/Areas/Admin/Content/assets/admin/layout2/img/avatar3_small.jpg" />
                                 <span class="username username-hide-on-mobile">
-                                    Nick
+                                    WhiteK
                                 </span>
                                 <i class="fa fa-angle-down"></i>
                             </a>
@@ -573,7 +573,7 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
                     <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li class="start active ">
-                            <a href="index.html">
+                            <a href="@Url.Action("Home", "HomeAdmin")">
                                 <i class="icon-home"></i>
                                 <span class="title">Trang chủ</span>
                             </a>
@@ -586,19 +586,19 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="ecommerce_index.html">
+                                    <a href="@Url.Action("UserAdminShowListIndex", "UserAdmin")">
                                         <i class="icon-home"></i>
                                         Trang chủ
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ecommerce_orders.html">
+                                    <a href="@Url.Action("UserAdminShowListIndex", "UserAdmin")">
                                         <i class="fa fa-list-ul"></i>
                                         Danh sách tài khoản
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ecommerce_orders_view.html">
+                                    <a href="@Url.Action("UserAdminCreate", "UserAdmin")">
                                         <i class="fa fa-plus-square"></i>
                                         Thêm mới
                                     </a>
@@ -619,19 +619,19 @@ License: You must have a valid license purchased only from themeforest(the above
                             </a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="ecommerce_index.html">
+                                    <a href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin")">
                                         <i class="icon-home"></i>
                                         Trang chủ
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ecommerce_orders.html">
+                                    <a href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin")">
                                         <i class="fa fa-list-ul"></i>
                                         Danh sách Bài viết
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ecommerce_orders_view.html">
+                                    <a href="@Url.Action("BlogAdminCreate", "BlogAdmin")">
                                         <i class="fa fa-plus-square"></i>
                                         Thêm mới
                                     </a>
@@ -1399,16 +1399,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END QUICK SIDEBAR -->
     </div>
     <!-- END CONTAINER -->
-    <!-- BEGIN FOOTER -->
-    <div class="page-footer">
-        <div class="page-footer-inner">
-            2014 &copy; Metronic by keenthemes. <a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes" title="Purchase Metronic just for 27$ and get lifetime updates for free" target="_blank">Purchase Metronic!</a>
-        </div>
-        <div class="scroll-to-top">
-            <i class="icon-arrow-up"></i>
-        </div>
-    </div>
-    <!-- END FOOTER -->
+
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>

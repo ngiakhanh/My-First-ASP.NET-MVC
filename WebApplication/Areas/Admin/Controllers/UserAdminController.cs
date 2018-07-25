@@ -8,7 +8,7 @@ using BLOG_Controller;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-    public class UserAdminController : Controller
+    public class UserAdminController : BaseController
     {
         // GET: Admin/UserAdmin
         public ActionResult UserAdminShowListIndex()
