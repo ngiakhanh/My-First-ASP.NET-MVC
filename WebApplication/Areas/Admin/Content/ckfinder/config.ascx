@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" EnableViewState="false" AutoEventWireup="false" Inherits="CKFinder.Settings.ConfigFile" %>
+<%@ Control Language="C#" EnableViewState="false" AutoEventWireup="false" Inherits="CKFinder.Settings.ConfigFile" %>
 <%@ Import Namespace="CKFinder.Settings" %>
 <script runat="server">
 
@@ -17,7 +17,7 @@
 		// ... where Session[ "IsAuthorized" ] is set to "true" as soon as the
 		// user logs on your system.
 
-		return true;   //Doannv - Bỏ check về quyền
+		return false;
 	}
 
 	/**
@@ -30,8 +30,8 @@
 		LicenseName = "";
 		LicenseKey = "";
 
-		//Doannv -  Sửa đường dẫn tới thư mục Upload dữ liệu ảnh
-		BaseUrl = "~/Content/Upload/";
+		// The base URL used to reach files in CKFinder through the browser.
+		BaseUrl = "/ckfinder/userfiles/";
 
 		// The phisical directory in the server where the file will end up. If
 		// blank, CKFinder attempts to resolve BaseUrl.

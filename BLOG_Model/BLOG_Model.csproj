@@ -68,6 +68,9 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\PersistentClasses1.cs" />
+    <Compile Include="EntityFramework\SP_Blog_getdeletedElements_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\SP_Blog_getElementById_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -75,6 +78,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\SP_User_checkLogin_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EntityFramework\SP_User_getdeletedElements_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="EntityFramework\SP_User_getElementById_Result.cs">

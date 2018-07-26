@@ -107,5 +107,39 @@ namespace BLOG_Model.Model
             }
             return null;
         }
+
+        public override bool deletePermanently(Guid id)
+        {
+            return dbContext.SP_User_deletePermanently(id)>0;
+        }
+
+        public override List<UserObject> getdeletedElements()
+        {
+            var listData = dbContext.SP_User_getdeletedElements();
+
+            List<UserObject> listUser = new List<UserObject>();
+            foreach (var item in listData)
+            {
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
+                listUser.Add(obj);
+            }
+            return listUser;
+        }
+
+        public override bool restore(Guid id)
+        {
+            return dbContext.SP_User_restore(id)>0;
+        }
     }
 }

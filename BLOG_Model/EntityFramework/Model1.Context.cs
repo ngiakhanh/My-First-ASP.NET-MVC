@@ -252,5 +252,51 @@ namespace BLOG_Model.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_checkLogin_Result>("SP_User_checkLogin", userNameParameter, passWordParameter);
         }
+    
+        public virtual ObjectResult<SP_Blog_getdeletedElements_Result> SP_Blog_getdeletedElements()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Blog_getdeletedElements_Result>("SP_Blog_getdeletedElements");
+        }
+    
+        public virtual ObjectResult<SP_User_getdeletedElements_Result> SP_User_getdeletedElements()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_getdeletedElements_Result>("SP_User_getdeletedElements");
+        }
+    
+        public virtual int SP_Blog_deletePermanently(Nullable<System.Guid> idBlog)
+        {
+            var idBlogParameter = idBlog.HasValue ?
+                new ObjectParameter("idBlog", idBlog) :
+                new ObjectParameter("idBlog", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Blog_deletePermanently", idBlogParameter);
+        }
+    
+        public virtual int SP_User_deletePermanently(Nullable<System.Guid> idUser)
+        {
+            var idUserParameter = idUser.HasValue ?
+                new ObjectParameter("idUser", idUser) :
+                new ObjectParameter("idUser", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_User_deletePermanently", idUserParameter);
+        }
+    
+        public virtual int SP_Blog_restore(Nullable<System.Guid> idBlog)
+        {
+            var idBlogParameter = idBlog.HasValue ?
+                new ObjectParameter("idBlog", idBlog) :
+                new ObjectParameter("idBlog", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Blog_restore", idBlogParameter);
+        }
+    
+        public virtual int SP_User_restore(Nullable<System.Guid> idUser)
+        {
+            var idUserParameter = idUser.HasValue ?
+                new ObjectParameter("idUser", idUser) :
+                new ObjectParameter("idUser", typeof(System.Guid));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_User_restore", idUserParameter);
+        }
     }
 }

@@ -39,5 +39,20 @@ namespace BLOG_Controller
         {
             return new UserModel().checkLogin(userName, passWord);
         }
+
+        public override List<UserObject> getdeletedElements()
+        {
+            return new UserModel().getdeletedElements();
+        }
+
+        public override bool deletePermanently(Guid id)
+        {
+            return new UserModel().deletePermanently(id);
+        }
+
+        public override bool restore(Guid id)
+        {
+            return new UserModel().restore(id);
+        }
     }
 }

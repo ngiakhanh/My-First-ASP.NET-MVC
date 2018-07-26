@@ -34,5 +34,20 @@ namespace BLOG_Controller
         {
             return new BlogModels().delete(id);
         }
+
+        public override List<BlogObject> getdeletedElements()
+        {
+            return new BlogModels().getdeletedElements();
+        }
+
+        public override bool deletePermanently(Guid id)
+        {
+            return new BlogModels().deletePermanently(id);
+        }
+
+        public override bool restore(Guid id)
+        {
+            return new BlogModels().restore(id);
+        }
     }
 }

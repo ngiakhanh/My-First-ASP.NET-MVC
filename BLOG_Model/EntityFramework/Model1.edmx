@@ -47,10 +47,17 @@
         <Function Name="SP_Blog_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="SP_Blog_deletePermanently" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_Blog_getdeletedElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_Blog_getElementById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="SP_Blog_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Blog_restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="SP_Blog_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="title" Type="nvarchar(max)" Mode="In" />
@@ -80,10 +87,17 @@
         <Function Name="SP_User_delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
         </Function>
+        <Function Name="SP_User_deletePermanently" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_User_getdeletedElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_User_getElementById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="SP_User_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_User_restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
         <Function Name="SP_User_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
           <Parameter Name="userName" Type="varchar" Mode="In" />
@@ -196,6 +210,20 @@
             <Parameter Name="userName" Mode="In" Type="String" />
             <Parameter Name="passWord" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_Blog_getdeletedElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getdeletedElements_Result)" />
+          <FunctionImport Name="SP_User_getdeletedElements" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getdeletedElements_Result)" />
+          <FunctionImport Name="SP_Blog_deletePermanently">
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_deletePermanently">
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Blog_restore">
+            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_restore">
+            <Parameter Name="idUser" Mode="In" Type="Guid" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Blog_getElementById_Result">
           <Property Type="Guid" Name="idBlog" Nullable="false" />
@@ -245,6 +273,29 @@
           <Property Type="Boolean" Name="isDel" Nullable="true" />
         </ComplexType>
         <ComplexType Name="SP_User_checkLogin_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Blog_getdeletedElements_Result">
+          <Property Type="Guid" Name="idBlog" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" />
+          <Property Type="String" Name="summury" Nullable="false" />
+          <Property Type="String" Name="contents" Nullable="false" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="idUser" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_User_getdeletedElements_Result">
           <Property Type="Guid" Name="idUser" Nullable="false" />
           <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
@@ -375,6 +426,41 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_getdeletedElements" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_getdeletedElements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_Blog_getdeletedElements_Result">
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summury" ColumnName="summury" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_getdeletedElements" FunctionName="Y2018AP51BLOGModel.Store.SP_User_getdeletedElements">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_getdeletedElements_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_deletePermanently" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_deletePermanently" />
+          <FunctionImportMapping FunctionImportName="SP_User_deletePermanently" FunctionName="Y2018AP51BLOGModel.Store.SP_User_deletePermanently" />
+          <FunctionImportMapping FunctionImportName="SP_Blog_restore" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_restore" />
+          <FunctionImportMapping FunctionImportName="SP_User_restore" FunctionName="Y2018AP51BLOGModel.Store.SP_User_restore" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -1,0 +1,79 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.UserObject>
+
+@{
+    ViewBag.Title = "RecycleAdminShowListIndexUser";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2>DANH SACH TAI KHOAN XOA</h2>
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th scope="col">Tai khoan</th>
+            <th scope="col">Ho ten</th>
+            <th scope="col">Email</th>
+            <th scope="col">SDT</th>
+            <th scope="col">Ngay tao</th>
+            <th scope="col">Ngay cap nhat</th>
+            <th scope="col">Thao tac</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.userName</td>
+                <td>@item.fullName</td>
+                <td>@item.email</td>
+                <td>@item.mobile</td>
+                <td>@item.created_at.Value.ToString("dd/MM/yyyy")</td>
+                <td>@item.updated_at.Value.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a onclick="restore_user('@item.idUser','@item.userName')" class="btn btn-success">Restore</a>
+                    <a onclick="delete_user('@item.idUser','@item.userName')" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+   function delete_user(id, name) {
+       if (confirm("Are you sure to delete "+name+" ?") == false)
+           return;
+	   $.ajax({
+		   type: 'POST',
+		   data: { id: id},
+		   url: '@Url.Action("RecycleAdminDeletePermanentlyUser", "RecycleAdmin")',
+		   success: function()
+           {
+               window.location.reload();
+           },
+           error: function()
+           {
+               alert("Failed :((");
+           }
+	   })
+    }
+
+    function restore_user(id, name) {
+       if (confirm("Are you sure to restore "+name+" ?") == false)
+           return;
+	   $.ajax({
+		   type: 'POST',
+		   data: { id: id},
+		   url: '@Url.Action("RecycleAdminRestoreUser", "RecycleAdmin")',
+		   success: function()
+           {
+               window.location.reload();
+           },
+           error: function()
+           {
+               alert("Failed :((");
+           }
+	   })
+    }
+
+</script>

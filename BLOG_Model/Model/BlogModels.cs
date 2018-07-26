@@ -96,6 +96,45 @@ namespace BLOG_Model.Model
         {
             return dbContext.SP_Blog_delete(id) > 0;
         }
+
+        public override List<BlogObject> getdeletedElements()
+        {
+            var listData = dbContext.SP_Blog_getdeletedElements();
+
+            List<BlogObject> listBlog = new List<BlogObject>();
+            foreach (var item in listData)
+            {
+                BlogObject obj = new BlogObject
+                {
+                    idBlog = item.idBlog,
+                    title = item.title,
+                    summury = item.summury,
+                    contents = item.contents,
+                    author = item.author,
+                    idUser = item.idUser,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel,
+                    UserObject = new UserObject
+                    {
+                        userName = item.userName,
+                    }
+                };
+                ;
+                listBlog.Add(obj);
+            }
+            return listBlog;
+        }
+
+        public override bool deletePermanently(Guid id)
+        {
+            return dbContext.SP_Blog_deletePermanently(id) > 0;
+        }
+
+        public override bool restore(Guid id)
+        {
+            return dbContext.SP_Blog_restore(id) > 0;
+        }
     }
 }
 

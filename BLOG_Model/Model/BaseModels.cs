@@ -22,6 +22,9 @@ namespace BLOG_Model.Model
         public virtual Boolean update(T obj) { return true; }
         public virtual Boolean delete(Guid id) { return true; }
         public virtual T checkLogin(String userName, String passWord) { return default(T); }
+        public virtual Boolean deletePermanently(Guid id) { return true; }
+        public virtual List<T> getdeletedElements() { return null; }
+        public virtual Boolean restore(Guid id) { return true; }
     }
 
 }
