@@ -43,7 +43,7 @@
 
 <script>
    function delete_blog(id, name) {
-       if (confirm("Are you sure to delete "+name+" ?") == false)
+       if (confirm("Are you sure to delete permanently "+name+" ?") == false)
            return;
 	   $.ajax({
 		   type: 'POST',
