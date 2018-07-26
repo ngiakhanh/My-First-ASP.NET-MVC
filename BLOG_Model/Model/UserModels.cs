@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLOG_Model.Model
 {
-     public class UserModel : BaseModels<UserObject>
+     public class UserModels : BaseModels<UserObject>
     {
         public override List<UserObject> getElements()
         {

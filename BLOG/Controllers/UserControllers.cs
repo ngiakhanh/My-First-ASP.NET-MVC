@@ -12,47 +12,47 @@ namespace BLOG_Controller
     {
         public override List<UserObject> getElements()
         {
-            return new UserModel().getElements();
+            return new UserModels().getElements();
         }
 
         public override UserObject getElementById(Guid id)
         {
-            return new UserModel().getElementById(id);
+            return new UserModels().getElementById(id);
         }
 
         public override bool update(UserObject obj)
         {
-            return new UserModel().update(obj);
+            return new UserModels().update(obj);
         }
 
         public override bool create(UserObject obj)
         {
-            return new UserModel().create(obj);
+            return new UserModels().create(obj);
         }
 
         public override bool delete(Guid id)
         {
-            return new UserModel().delete(id);
+            return new UserModels().delete(id);
         }
 
         public override UserObject checkLogin(string userName, string passWord)
         {
-            return new UserModel().checkLogin(userName, passWord);
+            return new UserModels().checkLogin(userName, passWord);
         }
 
         public override List<UserObject> getdeletedElements()
         {
-            return new UserModel().getdeletedElements();
+            return new UserModels().getdeletedElements();
         }
 
         public override bool deletePermanently(Guid id)
         {
-            return new UserModel().deletePermanently(id);
+            return new UserModels().deletePermanently(id);
         }
 
         public override bool restore(Guid id)
         {
-            return new UserModel().restore(id);
+            return new UserModels().restore(id);
         }
     }
 }
