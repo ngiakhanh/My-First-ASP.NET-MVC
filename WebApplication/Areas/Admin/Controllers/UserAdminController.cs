@@ -80,10 +80,7 @@ namespace WebApplication.Areas.Admin.Controllers
         public ActionResult UserAdminSearchTable(String email, int pageIndex)
         {
             int pageSize = CommonConstant.PAGESIZE;
-            int count = new UserControllers().searchCount(email);
-            ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
             ViewBag.Page = pageSize;
-            ViewBag.query = email;
             return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
         }
 
