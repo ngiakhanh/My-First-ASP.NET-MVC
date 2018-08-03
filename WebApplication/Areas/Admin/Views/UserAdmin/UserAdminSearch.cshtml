@@ -65,6 +65,7 @@
                    url: '@Url.Action("UserAdminSearchTable", "UserAdmin")',
                    success: function (result)
                    {
+                       //window.location.reload();
                        $("#dataDiv").html(result);
                    },
                    error: function()
