@@ -77,12 +77,6 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserAdminSearchTable()
-        {
-            return View();
-        }
-
-        [HttpPost]
         public ActionResult UserAdminSearchTable(String email, int pageIndex)
         {
             int pageSize = CommonConstant.PAGESIZE;
