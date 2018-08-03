@@ -1,0 +1,75 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.UserObject>
+
+@{
+    ViewBag.Title = "UserAdminSearch";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2 style="text-transform: uppercase;">Danh sách tài khoản</h2>
+@using (Html.BeginForm("UserAdminSearch", "UserAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div style="margin-bottom:10px; ">
+        <input class="form-control" style="width: 500px; float:left; margin-left: 110px;" type="text" name="txtkeyString" placeholder="Nhập vào tên email cần tìm..." />
+        <button type="submit" class="btn btn-success" style="margin-left: 10px;">Tìm kiếm</button>
+        <hr />
+    </div>
+
+    if (Model != null)
+    {
+    <div id="dataDiv">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="text-align: center;">#</th>
+                    <th style="text-align: center;">Tài khoản</th>
+                    <th style="text-align: center;">Họ tên</th>
+                    <th style="text-align: center;">Email</th>
+                    <th style="text-align: center;">Điện thoại</th>
+                    <th style="text-align: center;">Ngày tạo</th>
+                    <th style="text-align: center;">Ngày cập nhật</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="text-center"><input name="ids" type="checkbox" value="@item.idUser" /></td>
+                        <td>@item.userName</td>
+                        <td>@item.fullName</td>
+                        <td>@item.email</td>
+                        <td>@item.mobile</td>
+                        <td>@item.created_at.Value.ToString("dd-MM-yyyy")</td>
+                        <td>@item.updated_at.Value.ToString("dd-MM-yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+            for (int i = 0; i <= ViewBag.maxPage; i++)
+            {
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" onclick="paging('@ViewBag.query','@i')">@(i + 1)</a>
+                </li>
+            </ul>
+            }
+     }
+ }
+ <script>
+   function paging(id, name) {
+	   $.ajax({
+		   type: 'POST',
+		   data: { email: id, pageIndex: name},
+		   url: '@Url.Action("UserAdminSearchTable", "UserAdmin")',
+           success: function (result)
+           {
+               $("#dataDiv").html(result);
+           },
+           error: function()
+           {
+               alert("Failed :((");
+           }
+	   })
+}
+</script>

@@ -135,6 +135,45 @@ namespace BLOG_Model.Model
         {
             return dbContext.SP_Blog_restore(id) > 0;
         }
+
+        public override int getNumber()
+        {
+            var count = dbContext.SP_Blog_getNumberBlog();
+            foreach (var item in count)
+            {
+                return int.Parse(item.ToString());
+            }
+            return 0;
+        }
+
+        public override List<BlogObject> getPaging(int start, int length)
+        {
+            var listData = dbContext.SP_Blog_getPaging(start, length);
+
+            List<BlogObject> listBlog = new List<BlogObject>();
+            foreach (var item in listData)
+            {
+                BlogObject obj = new BlogObject
+                {
+                    idBlog = item.idBlog,
+                    title = item.title,
+                    summury = item.summury,
+                    contents = item.contents,
+                    author = item.author,
+                    idUser = item.idUser,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel,
+                    UserObject = new UserObject
+                    {
+                        userName = item.userName,
+                    }
+                };
+                ;
+                listBlog.Add(obj);
+            }
+            return listBlog;
+        }
     }
 }
 

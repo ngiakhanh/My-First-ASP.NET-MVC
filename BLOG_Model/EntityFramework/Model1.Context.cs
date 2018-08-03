@@ -298,5 +298,76 @@ namespace BLOG_Model.EntityFramework
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_User_restore", idUserParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> SP_User_getNumberUser()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_User_getNumberUser");
+        }
+    
+        public virtual ObjectResult<SP_User_getPaging_Result> SP_User_getPaging(Nullable<int> start, Nullable<int> length)
+        {
+            var startParameter = start.HasValue ?
+                new ObjectParameter("start", start) :
+                new ObjectParameter("start", typeof(int));
+    
+            var lengthParameter = length.HasValue ?
+                new ObjectParameter("length", length) :
+                new ObjectParameter("length", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_getPaging_Result>("SP_User_getPaging", startParameter, lengthParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_Blog_getNumberBlog()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Blog_getNumberBlog");
+        }
+    
+        public virtual ObjectResult<SP_Blog_getPaging_Result> SP_Blog_getPaging(Nullable<int> start, Nullable<int> length)
+        {
+            var startParameter = start.HasValue ?
+                new ObjectParameter("start", start) :
+                new ObjectParameter("start", typeof(int));
+    
+            var lengthParameter = length.HasValue ?
+                new ObjectParameter("length", length) :
+                new ObjectParameter("length", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_Blog_getPaging_Result>("SP_Blog_getPaging", startParameter, lengthParameter);
+        }
+    
+        public virtual ObjectResult<SP_User_Search_Result> SP_User_Search(string key)
+        {
+            var keyParameter = key != null ?
+                new ObjectParameter("key", key) :
+                new ObjectParameter("key", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_Search_Result>("SP_User_Search", keyParameter);
+        }
+    
+        public virtual ObjectResult<SP_User_Search_Paging_Result> SP_User_Search_Paging(string key, Nullable<int> start, Nullable<int> length)
+        {
+            var keyParameter = key != null ?
+                new ObjectParameter("key", key) :
+                new ObjectParameter("key", typeof(string));
+    
+            var startParameter = start.HasValue ?
+                new ObjectParameter("start", start) :
+                new ObjectParameter("start", typeof(int));
+    
+            var lengthParameter = length.HasValue ?
+                new ObjectParameter("length", length) :
+                new ObjectParameter("length", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_User_Search_Paging_Result>("SP_User_Search_Paging", keyParameter, startParameter, lengthParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> SP_User_countPaging(string key)
+        {
+            var keyParameter = key != null ?
+                new ObjectParameter("key", key) :
+                new ObjectParameter("key", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_User_countPaging", keyParameter);
+        }
     }
 }

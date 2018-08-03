@@ -141,5 +141,94 @@ namespace BLOG_Model.Model
         {
             return dbContext.SP_User_restore(id)>0;
         }
+
+        public override int getNumber()
+        {
+            var count = dbContext.SP_User_getNumberUser();
+            foreach (var item in count)
+            {
+                return int.Parse(item.ToString());
+            }
+            return 0;
+        }
+
+        public override List<UserObject> getPaging(int start, int length)
+        {
+            var listData = dbContext.SP_User_getPaging(start, length);
+            List<UserObject> listUser = new List<UserObject>();
+            foreach (var item in listData)
+            {
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
+                listUser.Add(obj);
+            }
+            return listUser;
+        }
+
+        public override List<UserObject> search(string email)
+        {
+            var listData = dbContext.SP_User_Search(email);
+            List<UserObject> listUser = new List<UserObject>();
+            foreach (var item in listData)
+            {
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
+                listUser.Add(obj);
+            }
+            return listUser;
+        }
+
+        public override List<UserObject> searchPaging(string email, int start, int length)
+        {
+            var listData = dbContext.SP_User_Search_Paging(email, start, length);
+            List<UserObject> listUser = new List<UserObject>();
+            foreach (var item in listData)
+            {
+                UserObject obj = new UserObject
+                {
+                    idUser = item.idUser,
+                    userName = item.userName,
+                    passWord = item.passWord,
+                    fullName = item.fullName,
+                    mobile = item.mobile,
+                    email = item.email,
+                    created_at = item.created_at,
+                    updated_at = item.updated_at,
+                    isDel = item.isDel
+                };
+                listUser.Add(obj);
+            }
+            return listUser;
+        }
+
+        public override int searchCount(string email)
+        {
+            var count = dbContext.SP_User_countPaging(email);
+            foreach (var item in count)
+            {
+                return int.Parse(item.ToString());
+            }
+            return 0;
+        }
     }
 }

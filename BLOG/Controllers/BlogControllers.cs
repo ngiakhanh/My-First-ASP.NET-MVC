@@ -49,5 +49,16 @@ namespace BLOG_Controller
         {
             return new BlogModels().restore(id);
         }
+
+        public override int getNumber()
+        {
+            return new BlogModels().getNumber();
+        }
+
+        public override List<BlogObject> getPaging(int start, int length)
+        {
+            return new BlogModels().getPaging(start, length);
+        }
+
     }
 }

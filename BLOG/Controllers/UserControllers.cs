@@ -54,5 +54,30 @@ namespace BLOG_Controller
         {
             return new UserModels().restore(id);
         }
+
+        public override int getNumber()
+        {
+            return new UserModels().getNumber();
+        }
+
+        public override List<UserObject> getPaging(int start, int length)
+        {
+            return new UserModels().getPaging(start, length);
+        }
+
+        public override List<UserObject> search(string email)
+        {
+            return new UserModels().search(email);
+        }
+
+        public override List<UserObject> searchPaging(string email, int start, int length)
+        {
+            return new UserModels().searchPaging(email, start, length);
+        }
+
+        public override int searchCount(string email)
+        {
+            return new UserModels().searchCount(email);
+        }
     }
 }

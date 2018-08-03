@@ -1,0 +1,36 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.UserObject>
+
+@{
+    Layout = null;
+}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="text-align: center;">#</th>
+                <th style="text-align: center;">Tài khoản</th>
+                <th style="text-align: center;">Họ tên</th>
+                <th style="text-align: center;">Email</th>
+                <th style="text-align: center;">Điện thoại</th>
+                <th style="text-align: center;">Ngày tạo</th>
+                <th style="text-align: center;">Ngày cập nhật</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td class="text-center"><input name="ids" type="checkbox" value="@item.idUser" /></td>
+                <td>@item.userName</td>
+                <td>@item.fullName</td>
+                <td>@item.email</td>
+                <td>@item.mobile</td>
+                <td>@item.created_at.Value.ToString("dd-MM-yyyy")</td>
+                <td>@item.updated_at.Value.ToString("dd-MM-yyyy")</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+<script>
+    $("input:checkbox,input:radio,input:file").uniform();
+</script>
+

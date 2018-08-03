@@ -5909,6 +5909,9 @@
     <Content Include="Areas\Admin\Content\ckfinder\userfiles\.htaccess" />
     <Content Include="Areas\Admin\Views\RecycleAdmin\RecycleAdminShowListIndexUser.cshtml" />
     <Content Include="Areas\Admin\Views\RecycleAdmin\RecycleAdminShowListIndexBlog.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\UserAdminSearch.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\UserAdminCreateMulti.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdmin\UserAdminSearchTable.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

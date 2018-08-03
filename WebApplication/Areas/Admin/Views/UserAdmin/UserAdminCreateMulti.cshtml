@@ -1,0 +1,158 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.UserObject>
+
+@{
+    ViewBag.Title = "UserAdminCreateMulti";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminPageLayout.cshtml";
+}
+
+<h2>UserAdminCreateMulti</h2>
+
+<style>
+
+    .portlet.box.purple-studio {
+        border: 1px solid #3b9c96;
+    }
+
+    .portlet.box .portlet-body {
+        padding: 38px;
+    }
+
+    .portlet.box.purple-studio {
+        width: 100%;
+    }
+
+    input.txtuserName {
+        height: 31px;
+    }
+
+    input.txtemail {
+        height: 31px;
+    }
+
+    input.txtfullName {
+        height: 31px;
+    }
+
+    input.txtmobile {
+        height: 31px;
+    }
+</style>
+
+
+<div style="padding-bottom:20px;width:100%">
+    <div class="portlet box purple-studio">
+        <div class="portlet-title" style="background-color:#45B6AF;">
+            <div class="caption">
+                <i class="fa fa-user-plus"></i>
+                Thêm mới Tài khoản
+            </div>
+            <div class="tools"></div>
+        </div>
+        <div class="portlet-body" style="padding-top:6px">
+            @using (Html.BeginForm("UserAdminCreateMulti", "UserAdmin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <table class="table tblChiTietThongTinNhap">
+                    <tr class="trFirstChild" data-id="-1">
+                        <th>Tài khoản</th>
+                        <th>Email</th>
+                        <th>Họ tên</th>
+                        <th>Điện thoại</th>
+                        <th>Xóa</th>
+                    </tr>
+
+                    @* Tạo ra 1 tr với nội dung nhập thông tin của 1 tài khoản *@
+                    <tr class="trAppend" style="display:none;">
+                        <td>
+                            <input name="" class="txtuserName" value="" placeholder="Nhập tài khoản" />
+                        </td>
+                        <td>
+                            <input name="" class="txtemail" value="" placeholder="Nhập Email" />
+                        </td>
+                        <td>
+                            <input name="" class="txtfullName" value="" placeholder="Nhập họ tên" />
+                        </td>
+                        <td>
+                            <input name="" class="txtmobile" value="" placeholder="Nhập số điện thoại" />
+                        </td>
+                        <td>
+                            <input class="btnDelete btn btn-danger" style="width:30px;height:30px" value="-" />
+                        </td>
+                    </tr>
+
+
+                </table>
+                <input type="button" value="+" class="btn btn-success" id="btnAdd" />
+                //<a onclick="CapNhatID()" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
+                <input type="submit" value="Thêm mới" class="btn btn-primary" id="btnNhapThongTin"/>
+                @Html.ActionLink("Quay về danh sách Tài khoản", "UserAdminShowListIndex", new { }, new { @class = "btn btn-default" })
+            }
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script>
+        $("#btnAdd").click(function () {
+            // Lấy id của tr cuối cùng thuộc thẻ table có class = tblChiTietPhieuNhap
+            //Bước 4: Phương thức find là tìm đến thẻ nào đó: ở đây là thẻ tr (:last-child) là thẻ tr cuối cùng trong thẻ tblChiTietPhieuNhap
+            var id_cuoi = $(".tblChiTietThongTinNhap").find("tr:last-child").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+            //Bước 1: Nội dung phía trong thẻ trAppend
+            var tdnoidung = $(".trAppend").html();
+            //Bước 2:Tạo 1 thẻ tr bao ngoài nội dung
+            var trnoidung = "<tr class=\"trAppended\" data-id=\"" + i + "\">" + tdnoidung + "</tr>";
+            ////Bước 3: Lấy thẻ table append vào 1 tr
+            $(".tblChiTietThongTinNhap").append(trnoidung);
+            loadIDLENTHE();
+            CapNhatID();
+        });
+
+        //Phương thức xử lý lấy thuộc tính attr từ thẻ tr gán xuống chỉ số phần tử các trong thuộc tính name của thẻ input
+        function loadIDLENTHE() {
+            $(".trAppended").each(function () {
+                //Lấy thuộc tính data-id của thẻ tr hiện
+                var id = $(this).attr("data-id");
+                var userName = "[" + id + "].userName";
+                var email = "[" + id + "].email";
+                var fullName = "[" + id + "].fullName";
+                var mobile = "[" + id + "].mobile";
+                $(this).find(".txtuserName").attr("name", userName);
+                $(this).find(".txtemail").attr("name", email);
+                $(this).find(".txtfullName").attr("name", fullName);
+                $(this).find(".txtmobile").attr("name", mobile);
+
+
+            })
+        };
+
+        function CapNhatID() {   //Lấy lại tr 1
+            var id_cuoi = $(".tblChiTietThongTinNhap").find(".trFirstChild").attr("data-id");
+            i = parseInt(id_cuoi) + 1;
+
+            $(".trAppended").each(function () {
+                var id = i;
+                $(this).attr("data-id", i);
+                //Cập nhật lại id khi xóa
+                var id = $(this).attr("data-id");
+                var id = $(this).attr("data-id");
+                var userName = "[" + id + "].userName";
+                var email = "[" + id + "].email";
+                var fullName = "[" + id + "].fullName";
+                var mobile = "[" + id + "].mobile";
+                $(this).find(".txtuserName").attr("name", userName);
+                $(this).find(".txtemail").attr("name", email);
+                $(this).find(".txtfullName").attr("name", fullName);
+                $(this).find(".txtmobile").attr("name", mobile);
+                i++;
+            })
+        }
+
+        //Xử lý sự kiện xóa
+        $("body").delegate(".btnDelete", "click", function () {
+            //Xóa phần tử cha phía ngoài
+            $(this).closest("tr").remove();
+            CapNhatID();
+
+        });
+    </script>
+}

@@ -26,22 +26,31 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@item.title</td>
-            <td>@item.summury</td>
-            <td>@Html.Raw(item.contents)</td>
-            <td>@item.author</td>
-            <td>@item.UserObject.userName</td>
-            <td>@item.created_at.Value.ToString("dd/MM/yyyy")</td>
-            <td>@item.updated_at.Value.ToString("dd/MM/yyyy")</td>
-            <td>
-                <a href="@Url.Action("BlogAdminUpdate","BlogAdmin", new {id = item.idBlog })" class="btn btn-success">Update</a>
-                <a onclick="delete_blog('@item.idBlog','@item.title')" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
-            </td>
-        </tr>
+            <tr>
+                <td>@item.title</td>
+                <td>@item.summury</td>
+                <td>@Html.Raw(item.contents)</td>
+                <td>@item.author</td>
+                <td>@item.UserObject.userName</td>
+                <td>@item.created_at.Value.ToString("dd/MM/yyyy")</td>
+                <td>@item.updated_at.Value.ToString("dd/MM/yyyy")</td>
+                <td>
+                    <a href="@Url.Action("BlogAdminUpdate","BlogAdmin", new {id = item.idBlog })" class="btn btn-success">Update</a>
+                    <a onclick="delete_blog('@item.idBlog','@item.title')" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@for (int i = 0; i <= ViewBag.maxPage; i++)
+{
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin", new { pageIndex = i })">@(i + 1)</a>
+        </li>
+    </ul>
+}
 
 <script>
    function delete_blog(id, name) {

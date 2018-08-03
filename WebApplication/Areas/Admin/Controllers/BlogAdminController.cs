@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLOG_Controller;
+using BLOG_ValueObject.Common;
 using BLOG_ValueObject.EntityObject;
 
 namespace WebApplication.Areas.Admin.Controllers
@@ -11,10 +12,14 @@ namespace WebApplication.Areas.Admin.Controllers
     public class BlogAdminController : BaseController
     {
         // GET: Admin/BlogAdmin
-        public ActionResult BlogAdminShowListIndex()
+        public ActionResult BlogAdminShowListIndex(int pageIndex = 0)
         {
+            int pageSize = CommonConstant.PAGESIZE;
+            int count = new BlogControllers().getNumber();
+            ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Page = pageSize;
             ViewBag.username = objUser.userName;
-            return View(new BlogControllers().getElements());
+            return View(new BlogControllers().getPaging(pageIndex * pageSize, pageSize));
         }
 
         [HttpGet]

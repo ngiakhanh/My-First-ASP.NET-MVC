@@ -587,12 +587,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             <ul class="sub-menu">
                                 <li>
                                     <a href="@Url.Action("UserAdminShowListIndex", "UserAdmin")">
-                                        <i class="icon-home"></i>
-                                        Trang chủ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("UserAdminShowListIndex", "UserAdmin")">
                                         <i class="fa fa-list-ul"></i>
                                         Danh sách tài khoản
                                     </a>
@@ -604,7 +598,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="ecommerce_products.html">
+                                    <a href="@Url.Action("UserAdminCreateMulti", "UserAdmin")">
+                                        <i class="fa fa-user-plus"></i>
+                                        Thêm mới nhiều
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("UserAdminSearch", "UserAdmin")">
                                         <i class="fa fa-search-plus"></i>
                                         Tìm kiếm
                                     </a>
@@ -618,12 +618,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <span class="arrow "></span>
                             </a>
                             <ul class="sub-menu">
-                                <li>
-                                    <a href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin")">
-                                        <i class="icon-home"></i>
-                                        Trang chủ
-                                    </a>
-                                </li>
                                 <li>
                                     <a href="@Url.Action("BlogAdminShowListIndex", "BlogAdmin")">
                                         <i class="fa fa-list-ul"></i>
@@ -653,12 +647,6 @@ License: You must have a valid license purchased only from themeforest(the above
                             <ul class="sub-menu">
                                 <li>
                                     <a href="@Url.Action("RecycleAdminShowListIndexUser", "RecycleAdmin")">
-                                        <i class="icon-home"></i>
-                                        Trang chủ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("RecycleAdminShowListIndexUser", "RecycleAdmin")">
                                         <i class="fa fa-list-ul"></i>
                                         Danh sách tài khoản
                                     </a>
@@ -667,12 +655,6 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <a href="@Url.Action("RecycleAdminShowListIndexBlog", "RecycleAdmin")">
                                         <i class="fa fa-plus-square"></i>
                                         Danh sách Bài viết
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="ecommerce_products.html">
-                                        <i class="fa fa-search-plus"></i>
-                                        Tìm kiếm
                                     </a>
                                 </li>
                             </ul>
@@ -822,9 +804,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="fa fa-comments"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number">
-                                        1349
-                                    </div>
+
+                                    @{
+                                        var countUser = new BLOG_Controller.UserControllers().getNumber();
+                                        <div class="number">
+                                            @countUser
+                                        </div>
+                                    }
+
                                     <div class="desc">
                                         Tài khoản
                                     </div>
@@ -837,9 +824,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <i class="fa fa-trophy"></i>
                                 </div>
                                 <div class="details">
-                                    <div class="number">
-                                        500
-                                    </div>
+                                    @{
+                                        var countBlog = new BLOG_Controller.BlogControllers().getNumber();
+                                        <div class="number">
+                                            @countBlog
+                                        </div>
+                                    }
                                     <div class="desc">
                                         Bài viết
                                     </div>
@@ -1399,7 +1389,6 @@ License: You must have a valid license purchased only from themeforest(the above
         <!-- END QUICK SIDEBAR -->
     </div>
     <!-- END CONTAINER -->
-
     <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
     <!-- BEGIN CORE PLUGINS -->
     <!--[if lt IE 9]>
@@ -1446,22 +1435,24 @@ License: You must have a valid license purchased only from themeforest(the above
     <script src="~/Areas/Admin/Content/assets/admin/pages/scripts/tasks.js" type="text/javascript"></script>
     <!-- END PAGE LEVEL SCRIPTS -->
     <script>
-jQuery(document).ready(function() {
-   Metronic.init(); // init metronic core componets
-   Layout.init(); // init layout
-   Demo.init(); // init demo features
-   QuickSidebar.init(); // init quick sidebar
-   Index.init();
-   Index.initDashboardDaterange();
-   Index.initJQVMAP(); // init index page's custom scripts
-   Index.initCalendar(); // init index page's custom scripts
-   Index.initCharts(); // init index page's custom scripts
-   Index.initChat();
-   Index.initMiniCharts();
-   Tasks.initDashboardWidget();
-});
+        jQuery(document).ready(function () {
+            Metronic.init(); // init metronic core componets
+            Layout.init(); // init layout
+            Demo.init(); // init demo features
+            QuickSidebar.init(); // init quick sidebar
+            Index.init();
+            Index.initDashboardDaterange();
+            Index.initJQVMAP(); // init index page's custom scripts
+            Index.initCalendar(); // init index page's custom scripts
+            Index.initCharts(); // init index page's custom scripts
+            Index.initChat();
+            Index.initMiniCharts();
+            Tasks.initDashboardWidget();
+
+        });
     </script>
     <!-- END JAVASCRIPTS -->
+    @RenderSection("Script", required: false)
 </body>
 <!-- END BODY -->
 </html>

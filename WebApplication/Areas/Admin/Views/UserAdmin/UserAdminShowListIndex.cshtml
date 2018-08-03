@@ -41,6 +41,15 @@
     </tbody>
 </table>
 
+@for (int i = 0; i <= ViewBag.maxPage; i++)
+{
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="@Url.Action("UserAdminShowListIndex", "UserAdmin", new { pageIndex = i })">@(i+1)</a>
+        </li>
+    </ul>
+}
+
 <script>
    function delete_user(id, name) {
        if (confirm("Are you sure to delete "+name+" ?") == false)

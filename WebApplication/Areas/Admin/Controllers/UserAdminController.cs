@@ -5,15 +5,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BLOG_Controller;
+using BLOG_ValueObject.Common;
 
 namespace WebApplication.Areas.Admin.Controllers
 {
-    public class UserAdminController : BaseController
+    public class UserAdminController : Controller
     {
         // GET: Admin/UserAdmin
-        public ActionResult UserAdminShowListIndex()
+        public ActionResult UserAdminShowListIndex(int pageIndex=0)
         {
-            return View(new UserControllers().getElements());
+            int pageSize = CommonConstant.PAGESIZE;
+            int count = new UserControllers().getNumber();
+            ViewBag.maxPage = (count/pageSize) - (count%pageSize == 0 ? 1: 0);
+            ViewBag.Page = pageSize;
+            return View(new UserControllers().getPaging(pageIndex * pageSize, pageSize));
         }
 
         [HttpGet]
@@ -45,6 +50,70 @@ namespace WebApplication.Areas.Admin.Controllers
         public JsonResult UserAdminDelete(Guid id)
         {
             return Json(new UserControllers().delete(id));
+        }
+
+        [HttpGet]
+        public ActionResult UserAdminSearch()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserAdminSearch(FormCollection f, int pageIndex = 0)
+        {
+            String email = f["txtkeyString"].ToString();
+            int pageSize = CommonConstant.PAGESIZE;
+            int count = new UserControllers().searchCount(email);
+            ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Page = pageSize;
+            ViewBag.query = email;
+            return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult UserAdminSearchTable()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserAdminSearchTable(String email, int pageIndex)
+        {
+            int pageSize = CommonConstant.PAGESIZE;
+            int count = new UserControllers().searchCount(email);
+            ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Page = pageSize;
+            ViewBag.query = email;
+            return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
+        }
+
+        [HttpGet]
+        public ActionResult UserAdminCreateMulti()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UserAdminCreateMulti(List<UserObject> data)
+        {
+            foreach (var item in data)
+            {
+                if (checkUser(item.userName))
+                {
+                    new UserControllers().create(item);
+                }
+            }
+            return RedirectToAction("UserAdminShowListIndex");
+        }
+
+        public Boolean checkUser(String userName)
+        {
+            IEnumerable<UserObject> lstUser = new UserControllers().getElements().Where(a => a.userName == userName);
+            if (lstUser.Count() == 0)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

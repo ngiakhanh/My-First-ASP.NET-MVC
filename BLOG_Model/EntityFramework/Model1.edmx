@@ -55,6 +55,11 @@
           <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="SP_Blog_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Blog_getNumberBlog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_Blog_getPaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="start" Type="int" Mode="In" />
+          <Parameter Name="length" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_Blog_restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idBlog" Type="uniqueidentifier" Mode="In" />
         </Function>
@@ -72,6 +77,9 @@
         <Function Name="SP_User_checkLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userName" Type="varchar" Mode="In" />
           <Parameter Name="passWord" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_User_countPaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_User_create" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
@@ -95,8 +103,21 @@
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
         </Function>
         <Function Name="SP_User_getElements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_User_getNumberUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_User_getPaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="start" Type="int" Mode="In" />
+          <Parameter Name="length" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_User_restore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="SP_User_Search" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_User_Search_Paging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="key" Type="varchar" Mode="In" />
+          <Parameter Name="start" Type="int" Mode="In" />
+          <Parameter Name="length" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_User_update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="idUser" Type="uniqueidentifier" Mode="In" />
@@ -219,10 +240,31 @@
           <Parameter Name="idUser" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_Blog_restore">
-            <Parameter Name="idBlog" Mode="In" Type="Guid" />
+          <Parameter Name="idBlog" Mode="In" Type="Guid" />
           </FunctionImport>
           <FunctionImport Name="SP_User_restore">
-            <Parameter Name="idUser" Mode="In" Type="Guid" />
+          <Parameter Name="idUser" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_getNumberUser" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="SP_User_getPaging" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_getPaging_Result)">
+            <Parameter Name="start" Mode="In" Type="Int32" />
+            <Parameter Name="length" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_Blog_getNumberBlog" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="SP_Blog_getPaging" ReturnType="Collection(Y2018AP51BLOGModel.SP_Blog_getPaging_Result)">
+            <Parameter Name="start" Mode="In" Type="Int32" />
+            <Parameter Name="length" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_Search" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_Search_Result)">
+          <Parameter Name="key" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_Search_Paging" ReturnType="Collection(Y2018AP51BLOGModel.SP_User_Search_Paging_Result)">
+            <Parameter Name="key" Mode="In" Type="String" />
+            <Parameter Name="start" Mode="In" Type="Int32" />
+            <Parameter Name="length" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_User_countPaging" ReturnType="Collection(Int32)">
+            <Parameter Name="key" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="SP_Blog_getElementById_Result">
@@ -305,6 +347,54 @@
           <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
           <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
           <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_User_getPaging_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="Int64" Name="RC" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_Blog_getPaging_Result">
+          <Property Type="Guid" Name="idBlog" Nullable="false" />
+          <Property Type="String" Name="title" Nullable="false" />
+          <Property Type="String" Name="summury" Nullable="false" />
+          <Property Type="String" Name="contents" Nullable="false" />
+          <Property Type="String" Name="author" Nullable="true" MaxLength="50" />
+          <Property Type="Guid" Name="idUser" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="Int64" Name="RC" Nullable="true" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="SP_User_Search_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SP_User_Search_Paging_Result">
+          <Property Type="Guid" Name="idUser" Nullable="false" />
+          <Property Type="String" Name="userName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="passWord" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="fullName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="mobile" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" Precision="23" />
+          <Property Type="Boolean" Name="isDel" Nullable="true" />
+          <Property Type="Int64" Name="RC" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -461,6 +551,73 @@
           <FunctionImportMapping FunctionImportName="SP_User_deletePermanently" FunctionName="Y2018AP51BLOGModel.Store.SP_User_deletePermanently" />
           <FunctionImportMapping FunctionImportName="SP_Blog_restore" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_restore" />
           <FunctionImportMapping FunctionImportName="SP_User_restore" FunctionName="Y2018AP51BLOGModel.Store.SP_User_restore" />
+          <FunctionImportMapping FunctionImportName="SP_User_getNumberUser" FunctionName="Y2018AP51BLOGModel.Store.SP_User_getNumberUser" />
+          <FunctionImportMapping FunctionImportName="SP_User_getPaging" FunctionName="Y2018AP51BLOGModel.Store.SP_User_getPaging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_getPaging_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="RC" ColumnName="RC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_Blog_getNumberBlog" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_getNumberBlog" />
+          <FunctionImportMapping FunctionImportName="SP_Blog_getPaging" FunctionName="Y2018AP51BLOGModel.Store.SP_Blog_getPaging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_Blog_getPaging_Result">
+                <ScalarProperty Name="idBlog" ColumnName="idBlog" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="summury" ColumnName="summury" />
+                <ScalarProperty Name="contents" ColumnName="contents" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="RC" ColumnName="RC" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_Search" FunctionName="Y2018AP51BLOGModel.Store.SP_User_Search">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_Search_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_Search_Paging" FunctionName="Y2018AP51BLOGModel.Store.SP_User_Search_Paging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Y2018AP51BLOGModel.SP_User_Search_Paging_Result">
+                <ScalarProperty Name="idUser" ColumnName="idUser" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="passWord" ColumnName="passWord" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullName" ColumnName="fullName" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+                <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+                <ScalarProperty Name="isDel" ColumnName="isDel" />
+                <ScalarProperty Name="RC" ColumnName="RC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_User_countPaging" FunctionName="Y2018AP51BLOGModel.Store.SP_User_countPaging" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

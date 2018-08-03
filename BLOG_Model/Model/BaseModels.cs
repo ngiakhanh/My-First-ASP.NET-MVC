@@ -25,6 +25,11 @@ namespace BLOG_Model.Model
         public virtual Boolean deletePermanently(Guid id) { return true; }
         public virtual List<T> getdeletedElements() { return null; }
         public virtual Boolean restore(Guid id) { return true; }
+        public virtual int getNumber() { return 0; }
+        public virtual List<T> getPaging(int start, int length) { return null;  }
+        public virtual List<T> search(String email) { return null; }
+        public virtual List<T> searchPaging(String email, int start, int length) { return null; }
+        public virtual int searchCount(String email) { return 0; }
     }
 
 }
