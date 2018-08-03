@@ -17,7 +17,6 @@ namespace WebApplication.Areas.Admin.Controllers
             int pageSize = CommonConstant.PAGESIZE;
             int count = new UserControllers().getNumber();
             ViewBag.maxPage = (count/pageSize) - (count%pageSize == 0 ? 1: 0);
-            ViewBag.Page = pageSize;
             return View(new UserControllers().getPaging(pageIndex * pageSize, pageSize));
         }
 
@@ -53,8 +52,16 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserAdminSearch()
+        public ActionResult UserAdminSearch(String email = null, int pageIndex = -1)
         {
+            if (email != null)
+            {
+                int pageSize = CommonConstant.PAGESIZE;
+                int count = new UserControllers().searchCount(email);
+                ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+                ViewBag.query = email;
+                return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
+            }
             return View();
         }
 
@@ -65,7 +72,6 @@ namespace WebApplication.Areas.Admin.Controllers
             int pageSize = CommonConstant.PAGESIZE;
             int count = new UserControllers().searchCount(email);
             ViewBag.maxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
-            ViewBag.Page = pageSize;
             ViewBag.query = email;
             return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
         }

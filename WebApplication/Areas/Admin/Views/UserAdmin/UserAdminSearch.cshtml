@@ -10,7 +10,7 @@
 {
 
     <div style="margin-bottom:10px; ">
-        <input class="form-control" style="width: 500px; float:left; margin-left: 110px;" type="text" name="txtkeyString" placeholder="Nhập vào tên email cần tìm..." />
+        <input required class="form-control" style="width: 500px; float:left; margin-left: 110px;" type="text" name="txtkeyString" placeholder="Nhập vào tên email cần tìm..." />
         <button type="submit" class="btn btn-success" style="margin-left: 10px;">Tìm kiếm</button>
         <hr />
     </div>
@@ -50,26 +50,26 @@
             {
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" onclick="paging('@ViewBag.query','@i')">@(i + 1)</a>
+                    @*<a class="page-link" href="@Url.Action("UserAdminSearch", "UserAdmin", new { email = @ViewBag.query, pageIndex = i })">@(i + 1)</a>*@
+                      <a class="page-link" onclick="paging('@ViewBag.query','@i')">@(i + 1)</a>
                 </li>
             </ul>
             }
-     }
+    }
  }
  <script>
-   function paging(id, name) {
-	   $.ajax({
-		   type: 'POST',
-		   data: { email: id, pageIndex: name},
-		   url: '@Url.Action("UserAdminSearchTable", "UserAdmin")',
-           success: function (result)
-           {
-               $("#dataDiv").html(result);
-           },
-           error: function()
-           {
-               alert("Failed :((");
-           }
-	   })
-}
+ function paging(id, name) {
+               $.ajax({
+                   type: 'POST',
+                   data: { email: id, pageIndex: name},
+                   url: '@Url.Action("UserAdminSearchTable", "UserAdmin")',
+                   success: function (result)
+                   {
+                       $("#dataDiv").html(result);
+                   },
+                   error: function()
+                   {
+                       alert("Failed :((");
+                   }
+               })}
 </script>

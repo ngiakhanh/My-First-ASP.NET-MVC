@@ -66,7 +66,7 @@
                             <input name="" class="txtuserName" value="" placeholder="Nhập tài khoản" />
                         </td>
                         <td>
-                            <input name="" class="txtemail" value="" placeholder="Nhập Email" />
+                            <input name="" type="email" class="txtemail" value="" placeholder="Nhập Email" />
                         </td>
                         <td>
                             <input name="" class="txtfullName" value="" placeholder="Nhập họ tên" />
@@ -81,8 +81,7 @@
 
 
                 </table>
-                <input type="button" value="+" class="btn btn-success" id="btnAdd" />
-                //<a onclick="CapNhatID()" class="btn btn-info" style="background-color: white; color: forestgreen">Delete</a>
+                <input type="button" value="+" class="btn btn-success" id="btnAdd" />       
                 <input type="submit" value="Thêm mới" class="btn btn-primary" id="btnNhapThongTin"/>
                 @Html.ActionLink("Quay về danh sách Tài khoản", "UserAdminShowListIndex", new { }, new { @class = "btn btn-default" })
             }
