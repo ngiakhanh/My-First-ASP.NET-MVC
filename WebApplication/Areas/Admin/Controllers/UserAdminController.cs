@@ -52,7 +52,7 @@ namespace WebApplication.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult UserAdminSearch(String email = null, int pageIndex = -1)
+        public ActionResult UserAdminSearch(String email = null, int pageIndex = 0)
         {
             if (email != null)
             {
@@ -80,7 +80,6 @@ namespace WebApplication.Areas.Admin.Controllers
         public ActionResult UserAdminSearchTable(String email, int pageIndex)
         {
             int pageSize = CommonConstant.PAGESIZE;
-            ViewBag.Page = pageSize;
             return View(new UserControllers().searchPaging(email, pageIndex * pageSize, pageSize));
         }
 
