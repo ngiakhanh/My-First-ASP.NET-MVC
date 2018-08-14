@@ -104,11 +104,15 @@
     <Compile Include="EntityFramework\tbl_Blog.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="EntityFramework\tbl_Contact.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="EntityFramework\tbl_Users.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\BaseModels.cs" />
     <Compile Include="Model\BlogModels.cs" />
+    <Compile Include="Model\ContactModels.cs" />
     <Compile Include="Model\UserModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

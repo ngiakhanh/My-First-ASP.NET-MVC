@@ -43,6 +43,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Controllers\BaseControllers.cs" />
     <Compile Include="Controllers\BlogControllers.cs" />
+    <Compile Include="Controllers\ContactControllers.cs" />
     <Compile Include="Controllers\UserControllers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,0 +1,32 @@
+﻿@model BLOG_ValueObject.EntityObject.BlogObject
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutCommon.cshtml";
+}
+
+<header class="masthead" style="background-image: url('/Content/img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>@Model.title</h1>
+                    <span>Posted by @Model.author @Model.updated_at.Value.ToShortDateString()</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <h2>@Model.summury</h2>
+                <p>@Html.Raw(@Model.contents)</p>
+            </div>
+        </div>
+    </div>
+</article>
+

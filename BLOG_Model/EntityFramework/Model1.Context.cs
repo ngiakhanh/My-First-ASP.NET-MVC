@@ -29,6 +29,7 @@ namespace BLOG_Model.EntityFramework
     
         public virtual DbSet<tbl_Blog> tbl_Blog { get; set; }
         public virtual DbSet<tbl_Users> tbl_Users { get; set; }
+        public virtual DbSet<tbl_Contact> tbl_Contact { get; set; }
     
         public virtual int SP_Blog_create(Nullable<System.Guid> idBlog, string title, string summury, string contents, string author, Nullable<System.Guid> idUser, Nullable<System.DateTime> created_at, Nullable<System.DateTime> updated_at, Nullable<bool> isDel)
         {
@@ -368,6 +369,35 @@ namespace BLOG_Model.EntityFramework
                 new ObjectParameter("key", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_User_countPaging", keyParameter);
+        }
+    
+        public virtual int SP_Contact_Insert(Nullable<System.Guid> idContact, string name, string email, Nullable<int> mobile, string message, Nullable<System.DateTime> created_at)
+        {
+            var idContactParameter = idContact.HasValue ?
+                new ObjectParameter("idContact", idContact) :
+                new ObjectParameter("idContact", typeof(System.Guid));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var mobileParameter = mobile.HasValue ?
+                new ObjectParameter("mobile", mobile) :
+                new ObjectParameter("mobile", typeof(int));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("message", message) :
+                new ObjectParameter("message", typeof(string));
+    
+            var created_atParameter = created_at.HasValue ?
+                new ObjectParameter("created_at", created_at) :
+                new ObjectParameter("created_at", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_Contact_Insert", idContactParameter, nameParameter, emailParameter, mobileParameter, messageParameter, created_atParameter);
         }
     }
 }

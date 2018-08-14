@@ -51,6 +51,20 @@ namespace WebApplication.Areas.Admin.Controllers
             return Json(new UserControllers().delete(id));
         }
 
+        [HttpPost]
+        public ActionResult UserAdminDeleteMulti(List<Guid> ids)
+        {
+            if (ids != null)
+            {
+                foreach (var item in ids)
+                {
+                    new UserControllers().delete(item);
+                }
+                return Json("OK");
+                
+            }
+            return Json("Failed");
+        }
         [HttpGet]
         public ActionResult UserAdminSearch(String email = null, int pageIndex = 0)
         {

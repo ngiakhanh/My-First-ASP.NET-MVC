@@ -1,0 +1,68 @@
+﻿@model IEnumerable<BLOG_ValueObject.EntityObject.UserObject>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<p>
+    <a onclick="delete_userSelected()" style="display:inline-block; float:right; margin-bottom: 10px;" class="btn btn-danger"><i class="fa fa-trash" style="padding-right: 5px;"></i>Xóa đã chọn</a>
+    <a href="@Url.Action("UserAdminCreate", "UserAdmin")" class="btn btn-primary">Add</a>
+</p>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th style="text-align: center;">#</th>
+            <th style="text-align: center;">Tài khoản</th>
+            <th style="text-align: center;">Họ tên</th>
+            <th style="text-align: center;">Email</th>
+            <th style="text-align: center;">Điện thoại</th>
+            <th style="text-align: center;">Ngày tạo</th>
+            <th style="text-align: center;">Ngày cập nhật</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center"><input name="ids" type="checkbox" value="@item.idUser" /></td>
+                <td>@item.userName</td>
+                <td>@item.fullName</td>
+                <td>@item.email</td>
+                <td>@item.mobile</td>
+                <td>@item.created_at.Value.ToString("dd-MM-yyyy")</td>
+                <td>@item.updated_at.Value.ToString("dd-MM-yyyy")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script>
+    $("input:checkbox,input:radio,input:file").uniform();
+</script>
+<script>
+        function delete_userSelected() {
+
+                var ids = [];
+                $(".dsxoa").each(function () {
+                    if ($(this).prop("checked") == true) {
+                        ids.push($(this).val());
+                    }
+
+                });
+
+                if (confirm("Bạn có muốn xóa không ?") != true)
+                return;
+                debugger
+
+                $.ajax({
+                    url: '@Url.Action("UserAdminDeleteMulti","UserAdmin")',
+                    type: 'POST',
+                    data: { ids: ids },
+                    success: function (result) {
+                        alert(result);
+                        window.location.reload();
+                    },
+                    error: function () {
+                        alert("Đã có lỗi xảy ra, xóa thất bại")
+                    }
+                })
+            }
+</script>

@@ -43,6 +43,7 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Common\CommonConstant.cs" />
     <Compile Include="EntityObject\BlogObject.cs" />
+    <Compile Include="EntityObject\ContactObject.cs" />
     <Compile Include="EntityObject\UserObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

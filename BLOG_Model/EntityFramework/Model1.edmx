@@ -19,6 +19,17 @@
           <Property Name="updated_at" Type="datetime" />
           <Property Name="isDel" Type="bit" />
         </EntityType>
+        <EntityType Name="tbl_Contact">
+          <Key>
+            <PropertyRef Name="idName" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="20" Nullable="false" />
+          <Property Name="Mobile" Type="int" Nullable="false" />
+          <Property Name="Message" Type="text" Nullable="false" />
+          <Property Name="Created_at" Type="datetime" Nullable="false" />
+          <Property Name="idName" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <EntityType Name="tbl_Users">
           <Key>
             <PropertyRef Name="idUser" />
@@ -73,6 +84,14 @@
           <Parameter Name="created_at" Type="datetime" Mode="In" />
           <Parameter Name="updated_at" Type="datetime" Mode="In" />
           <Parameter Name="isDel" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="SP_Contact_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idContact" Type="uniqueidentifier" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="mobile" Type="int" Mode="In" />
+          <Parameter Name="message" Type="text" Mode="In" />
+          <Parameter Name="created_at" Type="datetime" Mode="In" />
         </Function>
         <Function Name="SP_User_checkLogin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userName" Type="varchar" Mode="In" />
@@ -132,6 +151,7 @@
         </Function>
         <EntityContainer Name="Y2018AP51BLOGModelStoreContainer">
           <EntitySet Name="tbl_Blog" EntityType="Self.tbl_Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Contact" EntityType="Self.tbl_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -264,8 +284,17 @@
             <Parameter Name="length" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_User_countPaging" ReturnType="Collection(Int32)">
-            <Parameter Name="key" Mode="In" Type="String" />
+          <Parameter Name="key" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="SP_Contact_Insert">
+            <Parameter Name="idContact" Mode="In" Type="Guid" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="mobile" Mode="In" Type="Int32" />
+            <Parameter Name="message" Mode="In" Type="String" />
+            <Parameter Name="created_at" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <EntitySet Name="tbl_Contact" EntityType="Y2018AP51BLOGModel.tbl_Contact" />
         </EntityContainer>
         <ComplexType Name="SP_Blog_getElementById_Result">
           <Property Type="Guid" Name="idBlog" Nullable="false" />
@@ -396,6 +425,17 @@
           <Property Type="Boolean" Name="isDel" Nullable="true" />
           <Property Type="Int64" Name="RC" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tbl_Contact">
+          <Key>
+            <PropertyRef Name="idName" />
+          </Key>
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
+          <Property Name="Mobile" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Created_at" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="idName" Type="Guid" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -618,6 +658,19 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_User_countPaging" FunctionName="Y2018AP51BLOGModel.Store.SP_User_countPaging" />
+          <FunctionImportMapping FunctionImportName="SP_Contact_Insert" FunctionName="Y2018AP51BLOGModel.Store.SP_Contact_Insert" />
+          <EntitySetMapping Name="tbl_Contact">
+            <EntityTypeMapping TypeName="Y2018AP51BLOGModel.tbl_Contact">
+              <MappingFragment StoreEntitySet="tbl_Contact">
+                <ScalarProperty Name="idName" ColumnName="idName" />
+                <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
